@@ -8,31 +8,16 @@ def sum_of_real_numbers(*args):
         if type(i) == int or type(i) == float:
             sum += i
     print(sum)
-
+    return sum
+ 
+    
 sum_of_real_numbers(1,5,-3,"abc",[12,56,"cad"])
 
-
 # ○ your_function() which returns 0.
-def test_empty_parameters(*args):
-    sum = 0
-    for i in args:
-        if type(i) == int or type(i) == float:
-            sum += i
-    print(sum)
-
-test_empty_parameters()
+sum_of_real_numbers()
 
 # ○ your_function(2, 4, ‘abc’, param_1=2) which returns 6 (2 + 4).
-
-def sum_of_first_two(*args, **kwargs):
-    sum = 0
-    for i in args:
-        if type(i) == int or type(i) == float:
-            sum += i
-    print(sum)
-
-
-sum_of_first_two(2,4,"abc",param_1=2)
+sum_of_real_numbers(2,4,"abc",param_1=2)
 
 
 # a recursive function with integer numbers as parameters - calculates sum of numbers from [0 to n]
@@ -43,8 +28,6 @@ def recursive_sum_of_integers(n):
     return n + recursive_sum(n-1)
 
 print(recursive_sum_of_integers(5))
-
-
 
 # recursive function of sum of even numbers [0, n]
 def recursive_sum_even(n):
