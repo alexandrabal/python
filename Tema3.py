@@ -6,18 +6,20 @@ import csv
 import copy
 import json
 
-# Read cars from input
+''' Read cars from input'''
+
 csv_file = open ("input.csv","r")
     # rows = csv.reader(csv_file, delimiter ="\t")
     # for row in rows:
     #     print(row)
 my_data = list(csv.reader(csv_file))
 csv_file.close()
+print(my_data)
 
-# Each row from a dictionary, append to cars
+'''Append each row of the dictionary to cars '''
+
 # print(my_data)
-# don't include the header which is the column names in an xls. use slice
-
+# Don't include the header which is the column names in an xls. use slice
 skip_header = my_data[1:]
 cars=[]
 for row in skip_header:
@@ -25,7 +27,7 @@ for row in skip_header:
     my_cars_dictionary = {
         "brand":row[0],
         "model":row[1],
-        "price":row[2],
+        "price":int(row[2]),
         "hp":int(row[3])}
     cars.append(my_cars_dictionary)
 print(cars)
@@ -47,12 +49,12 @@ def check_hp(car):
 my_cars_dictionary= list(map(check_hp,cars))
 print(my_cars_dictionary)
 
-my_new_cars_dictionary = [{key: value for key, value in zip(header, element)} for element in my_cars_dictionary]
-print(my_new_cars_dictionary)
-with open('my_output.json', 'w') as json_file:
-json_object = json.dumps(my_new_cars_dictionary)
-json_file.write(json_object)
+# my_new_cars_dictionary = [{key: value for key, value in zip(header, element)} for element in my_cars_dictionary]
+# print(my_new_cars_dictionary)
 
+with open('my_output.json', 'w') as json_file:
+    json_object = json.dumps(my_cars_dictionary)
+    json_file.write(json_object)
 
 # Map - for each car set new key "price_category" cheap / medium / expensive
 for car in my_cars_dictionary:
@@ -64,50 +66,40 @@ for car in my_cars_dictionary:
          print(car)
 
 # # filter - filter only fast cars
-# def filter_for_speed(car):
-#     if car["power_category"] == "slow car":
-#         return True
-#
-# all_cars = filter(my_cars_dictionary,car)
-# new_all_cars = list(all_cars)
-# print(type(new_all_cars))
+def filter_for_speed(car):
+    if car["power_category"] == "slow car":
+        return True
+    else:
+        return False
 
+slow_cars = filter(lambda car: car["power_category"] == "slow car", my_cars_dictionary)
+print(type(slow_cars))
+# print(list(slow_cars))
+slow_cars_list = list(slow_cars)
+
+fast_cars = filter(lambda car: car["power_category"] == "fast car", my_cars_dictionary)
+# print(list(fast_cars))
+fast_cars_list = list(fast_cars)
+
+sport_cars = filter(lambda car: car["power_category"] == "sport car", my_cars_dictionary)
+# print(list(sport_cars))
+sport_cars_list = list(sport_cars)
 
 # print(type(json.object),json_object)
 # json_file.write(json_object)
 
-# with open("output_data/slow_cars.json","w") as my_output_file:
-#     my_output_file.write("text")
-#     print(my_output_file)
+with open("slow_cars.json","w") as my_slowcars_file:
+    json_slowcars_object = json.dumps(slow_cars_list)
+    my_slowcars_file.write(json_slowcars_object)
 
-# my_slow_cars = filter(check_hp, lambda "sport car" in car: car)
-# print(type(my_slow_cars))
-# print(my_slow_cars)
+with open("fast_cars.json","w") as my_fastcars_file:
+    json_fastcars_object = json.dumps(fast_cars_list)
+    my_fastcars_file.write(json_fastcars_object)
 
-
-# my_cars = []
-# with open ("input.csv") as csv_file:
-#     header = ()
-#     cars_data = []
-#     for index,line in enumerate(csv_file.readlines()):
-#         if index == 0:
-#             header = line.split(",")
-#         else:
-#             cars_data = line.split(",")
-#     print("cars_data", cars_data)
-#
-# my_sorted_cars = sorted(my_cars, key=lambda a: a.get('hp', 0), reverse=True)
-# print(my_sorted_cars)
-#
-# def view_numbers_comparison(a, b):
-#         print(f'{a} < {b} results in {a < b}')
-
-    # print("header", header)
-    # print("cars_data", cars_data)
-
-# slow_cars = sorted(list_of_cars, key= lambda c: c ["hp"])
-# print(slow_cars)
+with open("sport_cars.json","w") as my_sportcars_file:
+    json_sportcars_object = json.dumps(sport_cars_list)
+    my_sportcars_file.write(json_sportcars_object)
 
 
-# my_slow_cars = list(my_slow_cars)
-# print(my_slow_cars)
+
+
