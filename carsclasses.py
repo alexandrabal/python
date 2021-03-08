@@ -2,13 +2,10 @@ import csv
 
 csv_file = open ("input.csv","r")
 rows = csv.reader(csv_file, delimiter ="\t")
-# for row in rows:
-#     print(row)
 
 my_data = list(csv.reader(csv_file))
 csv_file.close()
 print(my_data)
-
 
 class Car:
 
