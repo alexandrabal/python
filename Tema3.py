@@ -9,19 +9,19 @@ import json
 ''' Read cars from input'''
 
 csv_file = open ("input.csv","r")
-    # rows = csv.reader(csv_file, delimiter ="\t")
-    # for row in rows:
-    #     print(row)
+rows = csv.reader(csv_file, delimiter ="\t")
+for row in rows:
+    print(row)
 my_data = list(csv.reader(csv_file))
 csv_file.close()
 print(my_data)
 
 '''Append each row of the dictionary to cars '''
-
 # print(my_data)
 # Don't include the header which is the column names in an xls. use slice
 skip_header = my_data[1:]
 cars=[]
+
 for row in skip_header:
     # print (row)
     my_cars_dictionary = {
@@ -40,6 +40,7 @@ def check_hp(car):
         updated_car["power_category"] = "slow car"
     if car["hp"] >= 120 and car["hp"] < 180:
         updated_car["power_category"] = "fast car"
+        print (updated_car)
     if car["hp"] > 180:
         updated_car["power_category"] = "sport car"
 
